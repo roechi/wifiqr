@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CodeNector</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-select.css">
+    <!-- Additional custom CSS -->
+    <link href="css/mystyle.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <header>
+        <!-- Navigation -->
+           <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand"href="index.html">CodeNector</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    </header> 
+    
+        <!-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"></nav> -->
+        <!--
+
+         Main jumbotron for a primary marketing message or…
+
+        -->
+        
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
+                <p class="lead">Data</p>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">SSID</span>
+                          <input type="text" class="form-control" id="ssid" placeholder="SSID" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">Password</span>
+                          <input type="password" class="form-control" id="password" placeholder="Password" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group">
+                        <!-- <div class="col-md-3"> -->
+                        <select class="selectpicker pull-left" id="encryption">
+                            <option>WPA2</option>
+                            <option>WPA</option>
+                            <option>WEP</option>
+                        </select>    
+                        <!-- </div> -->
+                        <div class="col-md-3">
+                            <div class="checkbox">
+                                            <label>
+                                                <input name="remember" type="checkbox" id="hidden" value="hidden">hide password
+                                            </label>
+                                        </div>
+                        </div>
+                        
+                        <!-- <div class="col-md-6"> -->
+                            <button type="button" onclick="updateQRCode()" class="btn btn-default pull-right" >Create</button>
+                        <!-- </div>                        -->
+                    </div>
+                </div>             
+            </div>
+
+            <div class="col-md-6">
+                <p class="lead">Sheet</p>
+                <div id="qrcode"></div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; CodeNector 2014</p>
+                </div>
+                <div class="col-lg-12">
+                    <p><a href="about.html">About this site</a></p>
+                </div>
+                <div class="col-lg-12">
+                    <p><a href="contact.html">Contact us</a></p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/qrcode.js"></script>
+    <script src="js/wifiqr.js"></script>
+</body>
+
+</html>

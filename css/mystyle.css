@@ -1,0 +1,25 @@
+body {
+	margin: 60px;
+}
+
+a {
+	color: #5e5e5e;
+}
+
+footer {
+	font-size: 12px;
+	color: #EBEBEB;
+}
+
+footer a {
+	color: #EBEBEB;
+}
+
+div .list-group a {
+	color: #5e5e5e;
+}
+
+.carousel-control,
+.item {
+    border-radius: 0px;
+}
