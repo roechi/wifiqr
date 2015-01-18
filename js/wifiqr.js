@@ -10,14 +10,45 @@ var black = "rgb(0,0,0)";
 var white = "rgb(255,255,255)";
 var QRCodeVersion = 5;
 
-function updateQRCode() {
+prefillQRForm();
+
+function fetchData() {
     ssid = document.getElementById("ssid").value;
     password = document.getElementById("password").value;
     encryption = document.getElementById("encryption").value;
-    if (document.getElementById("hidden").checked)
+    hidden = document.getElementById("hidden").checked;
+    localStorage.setItem('ssid', ssid);
+    //localStorage.setItem('password', password);
+    localStorage.setItem('encryption', encryption);
+    localStorage.setItem('hidden', hidden);
+}
+
+function fetchLocalStorage() {
+    ssid = localStorage.getItem('ssid');
+    password = localStorage.getItem('password');
+    encryption = localStorage.getItem('encryption');
+    hidden = localStorage.getItem('hidden');
+    if (hidden == "true")
         hidden = true;
     else 
         hidden = false;
+}
+
+function prefillQRForm() {
+    fetchLocalStorage();
+    document.getElementById('ssid').value = ssid;
+    document.getElementById('password').value = password;
+    document.getElementById('encryption').value = encryption;
+    document.getElementById('hidden').checked = hidden;
+    if (ssid != '' || password != '')
+        updateQRCode();
+    else
+        makeEmpty();
+    updateQRSheetData();
+}
+
+function updateQRCode() {
+    fetchData();
     totalString = 'WIFI:S:' + ssid + ';T:' + encryption + ';P:' + password +';H:' + hidden + ';;';
     qr = new QRCode(QRCodeVersion, QRErrorCorrectLevel.L); 
     qr.addData(totalString);
@@ -27,6 +58,18 @@ function updateQRCode() {
         qrArea.replaceChild(makeQRImage(qr), qrArea.lastChild);
     else 
         qrArea.appendChild(makeQRImage(qr));
+
+    updateQRSheetData();
+}
+
+function updateQRSheetData() {
+    fetchData();
+    var sheetDiv = '';
+    sheetDiv += '<p>SSID: ' + ssid + '</p>';
+    if (!hidden)
+        sheetDiv += '<p>Password: ' + password +'</p>';
+    sheetDiv += '<p>Encryption: ' + encryption + '</p>';
+    document.getElementById('qrSheetData').innerHTML=sheetDiv;
 }
 
 function makeQRImage( code ) {
@@ -53,3 +96,30 @@ function makeQRImage( code ) {
 
     return imgElement;
 }
+
+function makeEmpty() {
+    var canvas = document.createElement('canvas');
+    var canvasContext = canvas.getContext('2d');
+    qrEmpty = new QRCode(QRCodeVersion, QRErrorCorrectLevel.L);
+    qrEmpty.addData('');
+    qrEmpty.make();
+    var shiftForPadding = padding/2;
+    qrsize = qrEmpty.getModuleCount();
+    canvas.setAttribute('height', (qrsize * dotsize) + padding); 
+    canvas.setAttribute('width', (qrsize * dotsize) + padding);
+    for (var r = 0; r < qrsize; r++) {
+            for (var c = 0; c < qrsize; c++) {
+                canvasContext.fillStyle = white;  
+                canvasContext.fillRect ((c*dotsize) +shiftForPadding,(r*dotsize) + shiftForPadding,dotsize,dotsize);   // x, y, w, h
+            }   
+        } 
+    var imgElement = document.createElement("img");
+    imgElement.src = canvas.toDataURL("image/png");
+     var qrArea = document.getElementById('qrcode');
+    if (qrArea.lastChild)
+        qrArea.replaceChild(imgElement, qrArea.lastChild);
+    else 
+        qrArea.appendChild(imgElement);
+}
+
+

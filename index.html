@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CodeNector</title>
+    <title>WiFi Connector</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/bootstrap-select.css">
     <!-- Additional custom CSS -->
     <link href="css/mystyle.css" rel="stylesheet">
+    <link href="css/print.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,7 +37,7 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand"href="index.html">CodeNector</a>
+                <a class="navbar-brand"href="index.html">WiFi Connector</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,53 +59,67 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-md-6">
-                <p class="lead">Data</p>
+            <div class="col-md-6" id="qrform">
+                <p class="lead text-center">Data</p>
                 <div class="row">
-                    <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon" id="basic-addon1">SSID</span>
-                          <input type="text" class="form-control" id="ssid" placeholder="SSID" aria-describedby="basic-addon1">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-addon" id="basic-addon1">SSID</span>
+                              <input type="text" class="form-control" id="ssid" onkeyup="updateQRCode()" placeholder="SSID" aria-describedby="basic-addon1">
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon" id="basic-addon1">Password</span>
-                          <input type="password" class="form-control" id="password" placeholder="Password" aria-describedby="basic-addon1">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-addon" id="basic-addon1">Password</span>
+                              <input type="password" class="form-control" onkeyup="updateQRCode()" id="password" placeholder="Password" aria-describedby="basic-addon1">
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-
-                    <div class="form-group">
+                        <div class="col-md-6">
                         <!-- <div class="col-md-3"> -->
-                        <select class="selectpicker pull-left" id="encryption">
+                        <select class="selectpicker" onchange="updateQRCode()" id="encryption">
                             <option>WPA2</option>
                             <option>WPA</option>
-                            <option>WEP</option>
-                        </select>    
+                            <option>EAP</option>
+                        </select> 
+                        </div>   
                         <!-- </div> -->
                         <div class="col-md-3">
                             <div class="checkbox">
-                                            <label>
-                                                <input name="remember" type="checkbox" id="hidden" value="hidden">hide password
-                                            </label>
-                                        </div>
+                                <label>
+                                    <input name="remember" type="checkbox" id="hidden" value="hidden" onchange="updateQRSheetData()">hide password
+                                </label>
+                            </div>
                         </div>
-                        
-                        <!-- <div class="col-md-6"> -->
-                            <button type="button" onclick="updateQRCode()" class="btn btn-default pull-right" >Create</button>
-                        <!-- </div>                        -->
-                    </div>
+                        <div class="col-md-3">
+                            <button type="button" onclick="window.print()" class="btn btn-default" >Print sheet</button>
+                        </div>
                 </div>             
             </div>
 
             <div class="col-md-6">
-                <p class="lead">Sheet</p>
-                <div id="qrcode"></div>
                 
+                <p class="lead text-center">Sheet</p>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div id="qrcode" class="text-center" ></div>
+                            <div class="row">
+                            <div class="col-md-1"></div>
+                            <div id="qrSheetData" class="col-md-10"></div>
+                            <div class="col-md-1"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -118,7 +133,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; CodeNector 2014</p>
+                    <p>Copyright &copy; WiFi Connector 2014</p>
                 </div>
                 <div class="col-lg-12">
                     <p><a href="about.html">About this site</a></p>

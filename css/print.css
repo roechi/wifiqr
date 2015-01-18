@@ -1,0 +1,7 @@
+@media print {
+    header nav, footer, #qrform, hr, .lead {
+        display: none;
+    }
+
+
+}
