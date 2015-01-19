@@ -2,6 +2,7 @@ var ssid;
 var password;
 var encryption;
 var hidden;
+var hidePassword;
 var totalString;
 var qr;
 var dotsize = 5;  // size of box drawn on canvas
@@ -17,21 +18,28 @@ function fetchData() {
     password = document.getElementById("password").value;
     encryption = document.getElementById("encryption").value;
     hidden = document.getElementById("hidden").checked;
+    hidePassword = document.getElementById("hidePassword").checked;
     localStorage.setItem('ssid', ssid);
     //localStorage.setItem('password', password);
     localStorage.setItem('encryption', encryption);
     localStorage.setItem('hidden', hidden);
+    localStorage.setItem('hidePassword', hidePassword);
 }
 
 function fetchLocalStorage() {
     ssid = localStorage.getItem('ssid');
-    password = localStorage.getItem('password');
+    //password = localStorage.getItem('password');
     encryption = localStorage.getItem('encryption');
     hidden = localStorage.getItem('hidden');
     if (hidden == "true")
         hidden = true;
     else 
         hidden = false;
+    hidePassword = localStorage.getItem('hidePassword');
+    if (hidePassword == "true")
+        hidePassword = true;
+    else 
+        hidePassword = false;
 }
 
 function prefillQRForm() {
@@ -40,6 +48,7 @@ function prefillQRForm() {
     document.getElementById('password').value = password;
     document.getElementById('encryption').value = encryption;
     document.getElementById('hidden').checked = hidden;
+    document.getElementById('hidePassword').checked = hidePassword;
     if (ssid != '' || password != '')
         updateQRCode();
     else
@@ -66,7 +75,7 @@ function updateQRSheetData() {
     fetchData();
     var sheetDiv = '';
     sheetDiv += '<p>SSID: ' + ssid + '</p>';
-    if (!hidden)
+    if (!hidePassword)
         sheetDiv += '<p>Password: ' + password +'</p>';
     sheetDiv += '<p>Encryption: ' + encryption + '</p>';
     document.getElementById('qrSheetData').innerHTML=sheetDiv;
